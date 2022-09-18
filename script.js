@@ -28,7 +28,24 @@ const board = (() => {
                     ];
     function addMarker (cellTarget) {
         let i = cellTarget;
-        board.gameBoard[i] = player.markerChoice;               // board.gameBoard[i] = player.marker - use x for now.
+        board.gameBoard[i] = player.markerChoice[0];               
+        for (let i = 0; i < 9; i++) {
+        cell[i].textContent = gameBoard[i];
+        }
+    }
+    function addComputerMarker (cellTarget) {
+        let i = cellTarget;
+        const getComputerMarker = () => {
+        if (player.markerChoice === 'o') {
+            let computerMarker = 'x';
+            return computerMarker;
+        }
+        else {
+            let computerMarker = 'o';
+            return computerMarker;
+        }
+    }
+        board.gameBoard[i] = getComputerMarker();               
         for (let i = 0; i < 9; i++) {
         cell[i].textContent = gameBoard[i];
         }
@@ -64,7 +81,7 @@ cell.forEach(function (i) {
 const computerMove = () => {
     // let marker = getMarker();
         let choice = Math.floor(Math.random() * 8);
-        board.addMarker(choice);
+        board.addComputerMarker(choice);
 }
 
 
