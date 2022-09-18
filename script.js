@@ -1,4 +1,23 @@
 const cell = document.querySelectorAll('.cell');
+const buttons = document.querySelectorAll('button');
+
+player = {
+    markerChoice: [],
+}
+
+// Marker choice
+buttons.forEach(function (i) {
+    i.addEventListener('click', (e) => {
+        let markerChoice = e.target.getAttribute('id');
+        if (markerChoice === 'x') {
+            player.markerChoice.unshift('x');
+        }
+        else if (markerChoice === 'o') {
+            player.markerChoice.unshift('o');
+        }
+    })
+})
+console.log(player.markerChoice);
 
 // Renders cell content to board
 const board = (() => {
@@ -9,7 +28,7 @@ const board = (() => {
                     ];
     function addMarker (cellTarget) {
         let i = cellTarget;
-        board.gameBoard[i] = 'x';               // board.gameBoard[i] = player.marker - use x for now.
+        board.gameBoard[i] = player.markerChoice;               // board.gameBoard[i] = player.marker - use x for now.
         for (let i = 0; i < 9; i++) {
         cell[i].textContent = gameBoard[i];
         }
@@ -20,16 +39,9 @@ const board = (() => {
     }
 })();
 
-// player indicator? - x or o? store within player object later, link to button event-listeners
+// player object
 
-function getMarker () {
-    if (input === x) {
-        return x;
-    }
-    else if (input === o) {
-        return o;
-    }
-}
+
 
 // event listener for getChoice upon clicking a cell - call getChoice
 cell.forEach(function (i) {
