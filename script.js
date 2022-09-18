@@ -53,42 +53,88 @@ const board = (() => {
     return {
         gameBoard,
         addMarker,
+        addComputerMarker,
     }
 })();
 
-// player object
+console.log(board.gameBoard);
 
-
-
-// event listener for getChoice upon clicking a cell - call getChoice
-cell.forEach(function (i) {
-    i.addEventListener('click', (e) => {
-        let cellTarget = e.target.getAttribute('data-value');
-        board.addMarker(cellTarget);
-    })
-})
-
-
-// Cannot add to a filled spot
-
-
-// player object?
-
-
-
-// AI object
 
 const computerMove = () => {
     // let marker = getMarker();
         let choice = Math.floor(Math.random() * 8);
+        if (board.gameBoard[choice] != '') {
+            computerMove();
+        }
+        else {
         board.addComputerMarker(choice);
+        }
 }
+
+// event listener for getChoice upon clicking a cell - call getChoice
 
 
 // playGame function
-
-
-
-
+cell.forEach(function (i) {
+    i.addEventListener('click', (e) => {
+        let cellTarget = e.target.getAttribute('data-value');
+        board.addMarker(cellTarget);
+        let playerCount = 0;
+        let computerCount = 0;
+        playerCount++;
+        if (playerCount != computerCount) {
+            computerMove();
+        }
+    })
+})
 
 // Rounds until win condition
+
+const gameOver = () => {
+    if (board.gameBoard[0] && board.gameBoard[1] && board.gameBoard[2] === player.markerChoice 
+        || board.gameBoard[3] && board.gameBoard[4] && board.gameBoard[5] === player.markerChoice
+        || board.gameBoard[6] && board.gameBoard[7] && board.gameBoard[8] === player.markerChoice) {
+            return 'playerWin';
+        }
+        else if 
+            (board.gameBoard[0] && board.gameBoard[3] && board.gameBoard[6] === player.markerChoice 
+            || board.gameBoard[2] && board.gameBoard[4] && board.gameBoard[7] === player.markerChoice
+            || board.gameBoard[3] && board.gameBoard[5] && board.gameBoard[8] === player.markerChoice) {
+                return 'playerWin';
+            }
+        else if (board.gameBoard[0] && board.gameBoard[4] && board.gameBoard[8] === player.markerChoice 
+            || board.gameBoard[2] && board.gameBoard[4] && board.gameBoard[6] === player.markerChoice)
+                return 'playerWin';
+        else if (board.gameBoard[0] && board.gameBoard[1] && board.gameBoard[2] !== player.markerChoice 
+            || board.gameBoard[3] && board.gameBoard[4] && board.gameBoard[5] !== player.markerChoice
+            || board.gameBoard[6] && board.gameBoard[7] && board.gameBoard[8] !== player.markerChoice) {
+                return 'computerWin';
+            }
+        else if (board.gameBoard[0] && board.gameBoard[3] && board.gameBoard[6] !== player.markerChoice 
+            || board.gameBoard[2] && board.gameBoard[4] && board.gameBoard[7] !== player.markerChoice
+            || board.gameBoard[3] && board.gameBoard[5] && board.gameBoard[8] !== player.markerChoice) {
+                return 'computerWin';
+            }
+        else if (board.gameBoard[0] && board.gameBoard[4] && board.gameBoard[8] !== player.markerChoice 
+            || board.gameBoard[2] && board.gameBoard[4] && board.gameBoard[6] !== player.markerChoice) {
+                return 'computerWin';
+            }
+        else {
+            return 'tie';
+        }
+}
+
+const getWinner = () => {
+   let result = gameOver();
+    if (result === 'playerWin') {
+        console.log('Congratulations! You win!');
+    }
+    else if (result === 'computerWin') {
+        console.log('GG. Unfortunately the computer was too good for you!');
+    }
+    else if (result === 'tie') {
+        console.log("What an intense game! It's a draw.");
+    }
+}
+
+getWinner();
