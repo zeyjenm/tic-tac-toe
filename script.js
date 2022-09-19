@@ -47,7 +47,10 @@ const board = (() => {
     }
         board.gameBoard[i] = getComputerMarker();               
         for (let i = 0; i < 9; i++) {
-        cell[i].textContent = gameBoard[i];
+        setInterval(myCallback, 1200);
+        function myCallback () {
+            cell[i].textContent = gameBoard[i];
+        }
         }
     }
     return {
