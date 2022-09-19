@@ -18,7 +18,6 @@ buttons.forEach(function (i) {
         }
     })
 })
-console.log(player.markerChoice);
 
 // Renders cell content to board
 const board = (() => {
@@ -54,13 +53,14 @@ const board = (() => {
         let i = cellTarget;
         board.gameBoard[i] = getComputerMarker();               
         for (let i = 0; i < 9; i++) {
-        setInterval(myCallback, 1200);
+        setTimeout(myCallback, 1200);
         function myCallback () {
             cell[i].textContent = gameBoard[i];
+            announceWinner();
+    }
         } }
         }
-        announceWinner();
-    }
+        
     return {
         gameBoard,
         addMarker,
@@ -73,7 +73,12 @@ console.log(board.gameBoard);
 
 
 const computerMove = () => {
-    // let marker = getMarker();
+    const boardIsFull = (current) => current != ''; 
+    if (board.gameBoard.every(boardIsFull) == true) {
+        announceWinner('tie');
+        return;
+    }    
+    else {
         let choice = Math.floor(Math.random() * 8);
         if (board.gameBoard[choice] != '') {
             computerMove();
@@ -81,6 +86,7 @@ const computerMove = () => {
         else {
         board.addComputerMarker(choice);
         }
+    }
 }
 // event listener for getChoice upon clicking a cell - call getChoice
 
