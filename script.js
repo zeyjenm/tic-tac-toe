@@ -110,7 +110,7 @@ const gameOver = () => {
         }
         else if 
             (board.gameBoard[0] == player.markerChoice && board.gameBoard[3] == player.markerChoice && board.gameBoard[6] == player.markerChoice
-            || board.gameBoard[2] == player.markerChoice && board.gameBoard[4] == player.markerChoice && board.gameBoard[7] == player.markerChoice
+            || board.gameBoard[1] == player.markerChoice && board.gameBoard[4] == player.markerChoice && board.gameBoard[7] == player.markerChoice
             || board.gameBoard[3] == player.markerChoice && board.gameBoard[5] == player.markerChoice && board.gameBoard[8] == player.markerChoice) {
                 return 'playerWin';
             }
@@ -145,7 +145,7 @@ const getWinner = () => {
         return 'GG. Unfortunately the computer was too good for you!';
     }
     else if (result === 'tie') {
-        return "What an intense game!";
+        return "";
     }
     return result;
 }
