@@ -124,7 +124,7 @@ const gameOver = () => {
                 return 'computerWin';
             }
         else if (board.gameBoard[0] == computerChoice && board.gameBoard[3] == computerChoice && board.gameBoard[6] == computerChoice
-            || board.gameBoard[2] == computerChoice && board.gameBoard[4] == computerChoice && board.gameBoard[7] == computerChoice
+            || board.gameBoard[1] == computerChoice && board.gameBoard[4] == computerChoice && board.gameBoard[7] == computerChoice
             || board.gameBoard[3] == computerChoice && board.gameBoard[5] == computerChoice && board.gameBoard[8] == computerChoice) {
                 return 'computerWin';
             }
