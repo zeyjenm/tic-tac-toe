@@ -1,5 +1,6 @@
 const cell = document.querySelectorAll('.cell');
 const buttons = document.querySelectorAll('button');
+const winner = document.querySelector('.winner p');
 
 player = {
     markerChoice: [],
@@ -33,9 +34,7 @@ const board = (() => {
         cell[i].textContent = gameBoard[i];
         }
     }
-    function addComputerMarker (cellTarget) {
-        let i = cellTarget;
-        const getComputerMarker = () => {
+    const getComputerMarker = () => {
         if (player.markerChoice == 'o') {
             let computerMarker = 'x';
             return computerMarker;
@@ -45,18 +44,28 @@ const board = (() => {
             return computerMarker;
         }
     }
+    function addComputerMarker (cellTarget) {
+        let currentWinner = getWinner();
+        if (currentWinner == 'Congratulations! You win!') {
+            announceWinner();
+            return;
+        }
+        else {
+        let i = cellTarget;
         board.gameBoard[i] = getComputerMarker();               
         for (let i = 0; i < 9; i++) {
         setInterval(myCallback, 1200);
         function myCallback () {
             cell[i].textContent = gameBoard[i];
+        } }
         }
-        }
+        announceWinner();
     }
     return {
         gameBoard,
         addMarker,
         addComputerMarker,
+        getComputerMarker,
     }
 })();
 
@@ -73,7 +82,6 @@ const computerMove = () => {
         board.addComputerMarker(choice);
         }
 }
-
 // event listener for getChoice upon clicking a cell - call getChoice
 
 
@@ -88,41 +96,41 @@ cell.forEach(function (i) {
         if (playerCount != computerCount) {
             computerMove();
         }
-        getWinner();
     })
 })
 
 // Rounds until win condition
 
 const gameOver = () => {
-    if (board.gameBoard[0] === player.markerChoice && board.gameBoard[1] === player.markerChoice && board.gameBoard[2] === player.markerChoice 
-        || board.gameBoard[3] === player.markerChoice && board.gameBoard[4] === player.markerChoice && board.gameBoard[5] === player.markerChoice
-        || board.gameBoard[6] === player.markerChoice && board.gameBoard[7] === player.markerChoice && board.gameBoard[8] === player.markerChoice) {
+    let computerChoice = board.getComputerMarker();
+    if (board.gameBoard[0] == player.markerChoice && board.gameBoard[1] == player.markerChoice && board.gameBoard[2] == player.markerChoice 
+        || board.gameBoard[3] == player.markerChoice && board.gameBoard[4] == player.markerChoice && board.gameBoard[5] == player.markerChoice
+        || board.gameBoard[6] == player.markerChoice && board.gameBoard[7] == player.markerChoice && board.gameBoard[8] == player.markerChoice) {
             return 'playerWin';
         }
         else if 
-            (board.gameBoard[0] === player.markerChoice && board.gameBoard[3] === player.markerChoice && board.gameBoard[6] === player.markerChoice
-            || board.gameBoard[2] === player.markerChoice && board.gameBoard[4] === player.markerChoice && board.gameBoard[7] === player.markerChoice
-            || board.gameBoard[3] === player.markerChoice && board.gameBoard[5] === player.markerChoice && board.gameBoard[8] === player.markerChoice) {
+            (board.gameBoard[0] == player.markerChoice && board.gameBoard[3] == player.markerChoice && board.gameBoard[6] == player.markerChoice
+            || board.gameBoard[2] == player.markerChoice && board.gameBoard[4] == player.markerChoice && board.gameBoard[7] == player.markerChoice
+            || board.gameBoard[3] == player.markerChoice && board.gameBoard[5] == player.markerChoice && board.gameBoard[8] == player.markerChoice) {
                 return 'playerWin';
             }
-        else if (board.gameBoard[0] === player.markerChoice && board.gameBoard[4] === player.markerChoice && board.gameBoard[8] === player.markerChoice 
-            || board.gameBoard[2] === player.markerChoice && board.gameBoard[4] === player.markerChoice && board.gameBoard[6] === player.markerChoice)
+        else if (board.gameBoard[0] == player.markerChoice && board.gameBoard[4] == player.markerChoice && board.gameBoard[8] == player.markerChoice 
+            || board.gameBoard[2] == player.markerChoice && board.gameBoard[4] == player.markerChoice && board.gameBoard[6] == player.markerChoice)
                 return 'playerWin';
-      /*  else if (board.gameBoard[0] && board.gameBoard[1] && board.gameBoard[2] !== player.markerChoice 
-            || board.gameBoard[3] !== player.markerChoice && board.gameBoard[4] !== player.markerChoice && board.gameBoard[5] !== player.markerChoice
-            || board.gameBoard[6] !== player.markerChoice && board.gameBoard[7] !== player.markerChoice && board.gameBoard[8] !== player.markerChoice) {
+        else if (board.gameBoard[0] == computerChoice && board.gameBoard[1] == computerChoice && board.gameBoard[2] == computerChoice 
+            || board.gameBoard[3] == computerChoice && board.gameBoard[4] == computerChoice && board.gameBoard[5] == computerChoice
+            || board.gameBoard[6] == computerChoice && board.gameBoard[7] == computerChoice && board.gameBoard[8] == computerChoice) {
                 return 'computerWin';
             }
-        else if (board.gameBoard[0] !== player.markerChoice && board.gameBoard[3] !== player.markerChoice && board.gameBoard[6] !== player.markerChoice 
-            || board.gameBoard[2] !== player.markerChoice && board.gameBoard[4] !== player.markerChoice && board.gameBoard[7] !== player.markerChoice
-            || board.gameBoard[3] !== player.markerChoice && board.gameBoard[5] !== player.markerChoice && board.gameBoard[8] !== player.markerChoice) {
+        else if (board.gameBoard[0] == computerChoice && board.gameBoard[3] == computerChoice && board.gameBoard[6] == computerChoice
+            || board.gameBoard[2] == computerChoice && board.gameBoard[4] == computerChoice && board.gameBoard[7] == computerChoice
+            || board.gameBoard[3] == computerChoice && board.gameBoard[5] == computerChoice && board.gameBoard[8] == computerChoice) {
                 return 'computerWin';
             }
-        else if (board.gameBoard[0] !== player.markerChoice && board.gameBoard[4] !== player.markerChoice && board.gameBoard[8] !== player.markerChoice 
-            || board.gameBoard[2] !== player.markerChoice && board.gameBoard[4] !== player.markerChoice && board.gameBoard[6] !== player.markerChoice) {
+        else if (board.gameBoard[0] == computerChoice && board.gameBoard[4] == computerChoice&& board.gameBoard[8] == computerChoice 
+            || board.gameBoard[2] == computerChoice && board.gameBoard[4] == computerChoice && board.gameBoard[6] == computerChoice) {
                 return 'computerWin';
-            } */
+            } 
         else {
             return 'tie';
         }
@@ -131,13 +139,17 @@ const gameOver = () => {
 const getWinner = () => {
    let result = gameOver();
     if (result === 'playerWin') {
-        console.log('Congratulations! You win!');
+        return 'Congratulations! You win!';
     }
     else if (result === 'computerWin') {
-        console.log('GG. Unfortunately the computer was too good for you!');
+        return 'GG. Unfortunately the computer was too good for you!';
     }
     else if (result === 'tie') {
-        console.log("What an intense game! It's a draw.");
+        return "What an intense game!";
     }
+    return result;
 }
 
+const announceWinner = () => {
+    winner.textContent = getWinner();
+}
