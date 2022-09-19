@@ -115,8 +115,9 @@ const gameOver = () => {
                 return 'playerWin';
             }
         else if (board.gameBoard[0] == player.markerChoice && board.gameBoard[4] == player.markerChoice && board.gameBoard[8] == player.markerChoice 
-            || board.gameBoard[2] == player.markerChoice && board.gameBoard[4] == player.markerChoice && board.gameBoard[6] == player.markerChoice)
+            || board.gameBoard[2] == player.markerChoice && board.gameBoard[4] == player.markerChoice && board.gameBoard[6] == player.markerChoice) {
                 return 'playerWin';
+            }
         else if (board.gameBoard[0] == computerChoice && board.gameBoard[1] == computerChoice && board.gameBoard[2] == computerChoice 
             || board.gameBoard[3] == computerChoice && board.gameBoard[4] == computerChoice && board.gameBoard[5] == computerChoice
             || board.gameBoard[6] == computerChoice && board.gameBoard[7] == computerChoice && board.gameBoard[8] == computerChoice) {
@@ -142,7 +143,7 @@ const getWinner = () => {
         return 'Congratulations! You win!';
     }
     else if (result === 'computerWin') {
-        return 'GG. Unfortunately the computer was too good for you!';
+        return 'GG (stands for Get Good.) Unfortunately the computer was too good for you!';
     }
     else if (result === 'tie') {
         return "";
