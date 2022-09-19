@@ -1,10 +1,25 @@
+* {
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+body {
+    background-color: rgb(233, 225, 225);
+}
+
+.contents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 #container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     border: black solid 1px;
-    width: 400px;
-    height: 400px;
+    width: 440px;
+    height: 440px;
     margin: 10px;
 }
 
@@ -13,12 +28,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 36px;
+    font-size: 48px;
 }
 
 .winner {
-    border: black solid 1px;
-    width: 400px;
+    width: 500px;
     height: 100px;
-    margin: 10px;
+    margin: 40px;
+    text-align: center;
+    font-size: 24px;
+}
+
+h1 {
+    text-align: center;
+}
+
+button {
+    height: 44px;
+    width: 80px;
+    font-size: 28px;
+    margin: 12px;
+    border-radius: 12%;
+}
+
+#x {
+    background-color: #ee869d;
+}
+
+#o {
+    background-color: #4768ec;
 }
